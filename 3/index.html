@@ -68,12 +68,14 @@
             <div class="text-end">
                 <button type="button" class="btn btn-outline-light me-2">Login</button>
                 <button type="button" class="btn btn-warning">Sign-up</button>
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
                     <svg class="bi bi-cart4" width="1rem" height="1rem">
                         <use xlink:href="#cart4"/>
                     </svg>
                     Корзина
                 </button>
+
             </div>
         </div>
     </div>
@@ -81,9 +83,50 @@
 </header>
 <main>
     <div class="container">
-        <h1 class="text-center">Каталог товаров</h1>
+        <h1 class="text-center">Каталог товаров <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#applicform">
+            Оставьте заявку(форма с валидацией)
+        </button></h1>
         <div class="row row-cols-md-4 g-2 mb-3 products">
 
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="applicform" tabindex="-1" aria-labelledby="applicformLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="#" class="w-100" id="myform">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applicformLabel">Ваши данные</h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body cart-block">
+
+                        <div class="w-100">
+
+                            <label for="name" class="form-label">Ваше имя</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Иван Иванов">
+                        </div>
+                        <div class="w-100">
+                            <label for="tel" class="form-label">Телефон</label>
+                            <input type="tel" class="form-control" id="tel" name="tel" placeholder="+7(000)000-0000">
+                        </div>
+                        <div class="w-100">
+
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" id="val-btn" >Готово</button>
+
+                </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,10 +134,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Корзина</h5>
-                    <div class="d-flex">
-                        <strong class="d-block">Всего товаров</strong>
-                        <div id="quantity"></div>
-                    </div>
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body cart-block">
@@ -104,10 +144,14 @@
                 </div>
                 <div class="modal-footer">
                     <div class="d-flex">
-                        <strong class="d-block">Общая ст-ть:</strong>
-                        <div id="price"></div>
+                        <strong class="d-block">Всего товаров</strong>
+                        <div id="quantity"></div>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="d-flex">
+                        <strong class="d-block">Общая ст-ть:</strong>
+                        <div class="d-block" id="price"></div>
+                    </div>
+                    <!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
 
                 </div>
             </div>
@@ -115,6 +159,17 @@
     </div>
 </main>
 <script src="js/main.js"></script>
+<script src="js/validator.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
+<script>
+    window.onload = () => {
+        document.getElementById('myform').addEventListener('submit', e => {
+            let valid = new Validator('myform');
+            if(!valid.valid){
+                e.preventDefault();
+            }
+        })
+    }
+</script>
 </body>
 </html>
